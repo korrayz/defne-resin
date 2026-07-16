@@ -45,3 +45,18 @@ Lightbox, `pictures_mid` görselini otomatik `pictures_large`'a yükseltir.
   + `data-cat` (filtre için: `tablo|ayna|mini`). Lightbox ve satın alma linki bunlardan beslenir.
 - GSAP/Lenis CDN'i çökse veya JS kapalı olsa bile site tamamen okunur kalır
   (başlangıç durumları JS'te verilir, içerik hiçbir zaman CSS ile gizlenmez).
+
+## 🌐 Yayın
+
+- **Canlı adres:** https://korrayz.github.io/defne-resin/
+- **Repo:** https://github.com/korrayz/defne-resin (GitHub Pages, `main` / kök)
+- **Güncelleme akışı:** dosyayı değiştir → `git add -A && git commit -m "..." && git push` — Pages 1-2 dk içinde yeniden yayınlar.
+- **Alan adı bağlama:** Repo → Settings → Pages → Custom domain (`defneresin.com`) + DNS'te CNAME kaydı. Sonra `tools/build-urun.js` içindeki `DOMAIN` sabitini ve sayfalardaki canonical'ları güncelleyin.
+
+## Ürün detay sayfaları
+
+`urun/{shopierId}.html` — 24 sayfa, `tools/build-urun.js` ile üretilir:
+`node tools/build-urun.js` (sitemap.xml'i de günceller). Yeni ürün eklendiğinde
+script içindeki `PRODUCTS` listesine ekleyin, çalıştırın, push'layın; ayrıca
+`eserler.html` gridine bir kart ekleyin. Kart tıklaması otomatik olarak
+`data-href`'teki Shopier ID'sinden ürün sayfasına yönlenir.
