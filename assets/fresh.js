@@ -172,9 +172,10 @@ var artURLs = {};
   });
 })();
 
-/* ============ LENIS ============ */
+/* ============ LENIS — yalnız fare/trackpad'li cihazlarda (dokunmatikte
+   yerel kaydırma zaten akıcı; boşuna rAF döngüsü çalışmasın) ============ */
 var lenis = null;
-if (!reduced && typeof window.Lenis !== 'undefined'){
+if (!reduced && finePointer && typeof window.Lenis !== 'undefined'){
   lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
   if (hasGsap){
     lenis.on('scroll', ScrollTrigger.update);
@@ -185,34 +186,8 @@ if (!reduced && typeof window.Lenis !== 'undefined'){
   }
 }
 
-/* ============ NAV ============ */
-var nav = qs('.nav');
-function onScrollNav(){ if (nav) nav.classList.toggle('scrolled', window.scrollY > 24); }
-window.addEventListener('scroll', onScrollNav, { passive: true });
-onScrollNav();
-
-/* mobil panel */
-var menuBtn = qs('.menu-btn'), mPanel = qs('#m-panel');
-function closeMenu(){
-  if (!mPanel || !mPanel.classList.contains('open')) return;
-  mPanel.classList.remove('open');
-  menuBtn.classList.remove('open');
-  menuBtn.setAttribute('aria-expanded', 'false');
-  menuBtn.focus();
-}
-if (menuBtn && mPanel){
-  menuBtn.setAttribute('aria-controls', 'm-panel');
-  menuBtn.addEventListener('click', function(){
-    var open = mPanel.classList.toggle('open');
-    menuBtn.classList.toggle('open', open);
-    menuBtn.setAttribute('aria-expanded', String(open));
-    if (open){ var first = qs('a', mPanel); if (first) first.focus(); }
-  });
-  document.addEventListener('click', function(e){
-    if (!mPanel.classList.contains('open')) return;
-    if (!mPanel.contains(e.target) && !menuBtn.contains(e.target)) closeMenu();
-  });
-}
+/* Nav durumu, menü, çapalar, kart navigasyonu, filtre ve alıntı geçişi
+   assets/critical.js'te — CDN'den bağımsız, anında çalışır. */
 
 /* ============ GİRİŞ + REVEAL ============ */
 if (anim){
@@ -292,63 +267,5 @@ if (anim){
   }
   window.addEventListener('load', function(){ ScrollTrigger.refresh(); });
 }
-
-/* ============ KATALOG FİLTRESİ ============ */
-(function(){
-  var row = qs('.filter-row');
-  if (!row) return;
-  var chips = qsa('.chip', row);
-  var cards = qsa('.cat-grid .work');
-  chips.forEach(function(chip){
-    chip.addEventListener('click', function(){
-      chips.forEach(function(c){
-        c.classList.toggle('on', c === chip);
-        c.setAttribute('aria-pressed', String(c === chip));
-      });
-      var cat = chip.getAttribute('data-filter');
-      cards.forEach(function(card){
-        card.classList.toggle('hidden', cat !== 'hepsi' && card.getAttribute('data-cat') !== cat);
-      });
-      if (hasGsap) ScrollTrigger.refresh();
-    });
-  });
-})();
-
-/* ============ ALINTI GEÇİŞİ (yalnız elle — WCAG dostu) ============ */
-(function(){
-  var slides = qsa('.quote-slide');
-  if (!slides.length) return;
-  var idx = 0;
-  function show(n){
-    idx = (n + slides.length) % slides.length;
-    slides.forEach(function(sl, i){ sl.classList.toggle('on', i === idx); });
-  }
-  var prev = qs('#q-prev'), next = qs('#q-next');
-  if (prev) prev.addEventListener('click', function(){ show(idx - 1); });
-  if (next) next.addEventListener('click', function(){ show(idx + 1); });
-  show(0);
-})();
-
-/* ============ ÜRÜN KARTLARI → DETAY SAYFASI ============ */
-qsa('.work').forEach(function(card){
-  var href = card.getAttribute('data-href') || '';
-  var m = href.match(/(\d+)\/?$/);
-  if (!m) return;
-  /* ürün sayfasının içinden de, kök sayfalardan da doğru göreli yol */
-  var base = /\/urun\//.test(location.pathname) ? '' : 'urun/';
-  var target = base + m[1] + '.html';
-  var ph = qs('.ph', card) || card;
-  ph.setAttribute('tabindex', '0');
-  ph.setAttribute('role', 'link');
-  ph.setAttribute('aria-label', (card.getAttribute('data-title') || 'Ürün') + ' — detay sayfası');
-  ph.style.cursor = 'pointer';
-  ph.addEventListener('click', function(){ location.href = target; });
-  ph.addEventListener('keydown', function(e){
-    if (e.key === 'Enter'){ location.href = target; }
-  });
-});
-document.addEventListener('keydown', function(e){
-  if (e.key === 'Escape') closeMenu();
-});
 
 })();

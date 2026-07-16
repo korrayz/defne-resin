@@ -152,7 +152,7 @@ function page(p){
 
   <article class="pdp">
     <div class="pdp-img" data-r>
-      <img src="${CDN}/pictures_large/${p.img}" alt="${esc(p.ad)} — ${esc(p.tech.toLowerCase())}, ${esc(p.size)}" fetchpriority="high">
+      <img src="${CDN}/pictures_large/${p.img}" srcset="${CDN}/pictures_mid/${p.img} 458w, ${CDN}/pictures_large/${p.img} 916w" sizes="(max-width:900px) 92vw, 48vw" alt="${esc(p.ad)} — ${esc(p.tech.toLowerCase())}, ${esc(p.size)}" fetchpriority="high">
     </div>
     <div class="pdp-info">
       <span class="badge${p.sale ? ' badge--sale' : ''}">${esc(p.badge)}</span>
@@ -225,10 +225,11 @@ ${rel}
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js"></script>
-<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
-<script src="../assets/fresh.js"></script>
+<script src="../assets/critical.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js" defer></script>
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js" defer></script>
+<script src="../assets/fresh.js" defer></script>
 </body>
 </html>
 `;

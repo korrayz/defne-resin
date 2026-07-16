@@ -65,8 +65,8 @@
 <section class="sec-tight">
   <div class="wrap artist-grid">
     <div class="artist-visual" data-r="left">
-      <!-- Defne'nin fotoğrafını assets/img/defne.jpg olarak kaydedin — otomatik görünür; yoksa Shopier profil görseli gösterilir -->
-      <div class="ph"><img src="assets/img/defne.jpg" onerror="this.onerror=null;this.src='https://cdn.shopier.app/logo_468/defneresin_afd8f2c201e32bd757fe93380744710c.png'" alt="Defne, atölyesinde epoksi eser üzerinde çalışırken" loading="lazy" decoding="async"></div>
+      <!-- TODO: Defne fotoğrafı gelince assets/img/defne.jpg olarak kaydedip src'yi ona çevirin (~700px, ≤120KB önerilir) -->
+      <div class="ph"><img src="https://cdn.shopier.app/logo_468/defneresin_afd8f2c201e32bd757fe93380744710c.png" alt="Defne, atölyesinde epoksi eser üzerinde çalışırken" loading="lazy" decoding="async"></div>
     </div>
     <div class="artist-copy">
       <h2 data-r>Merhaba, ben <em>Defne.</em></h2>
@@ -198,9 +198,10 @@
 </footer>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js"></script>
-<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
-<script src="assets/fresh.js"></script>
+<script src="assets/critical.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js" defer></script>
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js" defer></script>
+<script src="assets/fresh.js" defer></script>
 </body>
 </html>
