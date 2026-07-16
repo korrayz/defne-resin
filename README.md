@@ -48,7 +48,9 @@ Lightbox, `pictures_mid` görselini otomatik `pictures_large`'a yükseltir.
 
 ## 🌐 Yayın
 
-- **Canlı adres:** https://korrayz.github.io/defne-resin/
+- **Canlı adres (birincil):** https://defneresin.vercel.app/
+- **Yedek adres:** https://korrayz.github.io/defne-resin/ (GitHub Pages)
+- **Vercel güncelleme:** `npx vercel deploy --prod --yes` (proje: defneresin, hesap: koray-4719)
 - **Repo:** https://github.com/korrayz/defne-resin (GitHub Pages, `main` / kök)
 - **Güncelleme akışı:** dosyayı değiştir → `git add -A && git commit -m "..." && git push` — Pages 1-2 dk içinde yeniden yayınlar.
 - **Alan adı bağlama:** Repo → Settings → Pages → Custom domain (`defneresin.com`) + DNS'te CNAME kaydı. Sonra `tools/build-urun.js` içindeki `DOMAIN` sabitini ve sayfalardaki canonical'ları güncelleyin.

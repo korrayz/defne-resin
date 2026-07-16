@@ -1,2 +1,6 @@
 _eski/
 .claude/
+.vercel/
+
+.vercel
+.env*
